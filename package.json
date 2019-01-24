@@ -5,6 +5,10 @@
   "version": "1.0.0",
   "icon": "images/logo.png",
   "publisher": "ceyhunkeklik",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ceyhunkeklik/vscode-ngrok-client.git"
+  },
   "engines": {
     "vscode": "^1.30.0"
   },
