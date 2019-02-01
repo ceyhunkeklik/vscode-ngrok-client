@@ -1,24 +1,17 @@
-const vscode = require("vscode");
-const request = require("request");
-const ngrok = require("ngrok");
+import * as vscode from "vscode";
+import * as request from "request";
+import * as ngrok from "ngrok";
+import * as httpServer from "http-server";
+import * as portFinder from "portfinder";
 const opn = require("opn");
-const httpServer = require("http-server");
-const portFinder = require("portfinder");
 
-const commands = {
-  startServer: "ngrok-client.startServer",
-  stopServer: "ngrok-client.stopServer",
-  toggle: "ngrok-client.toggle"
-};
-const tunnelApi = "http://localhost:4040/api/tunnels";
-const statusBarStartText = `$(circle-slash) ngrok client: stop server`;
-const statusBarStopText = `$(globe) ngrok client: start server`;
+import constants from "./constants";
 
-let output;
-let httpServerInstance;
-let statusBarIcon;
+let output: any;
+let httpServerInstance: any;
+let statusBarIcon: vscode.StatusBarItem;
 
-const createLog = msg => {
+const createLog = (msg: string) => {
   if (msg) {
     output.appendLine(`ngrok-client: ${msg}`);
   }
@@ -26,9 +19,9 @@ const createLog = msg => {
 
 const stopServer = () => {
   return new Promise(resolve => {
-    request(tunnelApi, { json: true }, (err, res, body) => {
+    request(constants.tunnelApi, { json: true }, (err, res, body) => {
       if (!err && body.tunnels) {
-        body.tunnels.forEach(tunnel => {
+        body.tunnels.forEach((tunnel: any) => {
           ngrok.disconnect(tunnel.public_url);
         });
 
@@ -46,10 +39,10 @@ const stopServer = () => {
 };
 
 const updateStatusBarItem = () => {
-  if (statusBarIcon.text === statusBarStopText) {
-    vscode.commands.executeCommand(commands.startServer);
+  if (statusBarIcon.text === constants.statusBarStopText) {
+    vscode.commands.executeCommand(constants.commands.startServer);
   } else {
-    vscode.commands.executeCommand(commands.stopServer);
+    vscode.commands.executeCommand(constants.commands.stopServer);
   }
 };
 
@@ -58,18 +51,18 @@ const createStatusBarItem = () => {
     vscode.StatusBarAlignment.Right,
     Number.MAX_SAFE_INTEGER
   );
-  statusBarIcon.command = commands.toggle;
+  statusBarIcon.command = constants.commands.toggle;
   statusBarIcon.text = `$(globe) ngrok client: start server`;
   statusBarIcon.show();
 };
 
-function activate(context) {
+export function activate(context: vscode.ExtensionContext) {
   output = vscode.window.createOutputChannel("ngrok-client");
 
   createStatusBarItem();
 
   context.subscriptions.push(
-    vscode.commands.registerCommand(commands.startServer, () => {
+    vscode.commands.registerCommand(constants.commands.startServer, () => {
       output.show();
       stopServer().then(() => {
         //output.clear();
@@ -106,7 +99,7 @@ function activate(context) {
 
                       opn(result);
 
-                      statusBarIcon.text = statusBarStartText;
+                      statusBarIcon.text = constants.statusBarStartText;
                     })
                     .catch(error => {
                       if (
@@ -150,28 +143,22 @@ function activate(context) {
   );
 
   context.subscriptions.push(
-    vscode.commands.registerCommand(commands.stopServer, function() {
+    vscode.commands.registerCommand(constants.commands.stopServer, function() {
       output.show();
       stopServer().then(() => {
-        statusBarIcon.text = statusBarStopText;
+        statusBarIcon.text = constants.statusBarStopText;
       });
     })
   );
 
   context.subscriptions.push(
-    vscode.commands.registerCommand(commands.toggle, function() {
+    vscode.commands.registerCommand(constants.commands.toggle, function() {
       updateStatusBarItem();
     })
   );
 }
-exports.activate = activate;
 
 // this method is called when your extension is deactivated
-function deactivate() {
-  vscode.commands.executeCommand(commands.stopServer);
+export function deactivate() {
+  vscode.commands.executeCommand(constants.commands.stopServer);
 }
-
-module.exports = {
-  activate,
-  deactivate
-};
