@@ -3,6 +3,7 @@
 ##Unreleased
 ### Update
 - Project was updated as "Typescript"
+- .prettierrc was added
 
 ## [1.0.1]
 ### Update
