@@ -1,5 +1,7 @@
 # Change Log
 
+- fix dependency vulnerabilities
+
 ## [1.0.2]
 ### Update
 - Project was updated as "Typescript"

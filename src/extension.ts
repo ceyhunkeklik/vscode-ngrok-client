@@ -3,7 +3,7 @@ import * as request from "request";
 import * as ngrok from "ngrok";
 import * as httpServer from "http-server";
 import * as portFinder from "portfinder";
-const opn = require("opn");
+import * as open from "open";
 
 import constants from "./constants";
 
@@ -88,7 +88,9 @@ export function activate(context: vscode.ExtensionContext) {
                     .then(result => {
                       createLog(`ngrok started successfully: Remote URL: ${result}`);
 
-                      opn(result);
+                      (async () => {
+                        await open(result);
+                      })();
 
                       statusBarIcon.text = constants.statusBarStartText;
                     })
