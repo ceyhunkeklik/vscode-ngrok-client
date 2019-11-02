@@ -1,5 +1,6 @@
 # Change Log
 
+## [1.0.3]
 - fix dependency vulnerabilities
 - add port number customization configuration
 
