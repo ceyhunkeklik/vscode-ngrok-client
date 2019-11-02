@@ -1,60 +1,75 @@
 {
- "name": "vscode-ngrok-client",
- "displayName": "ngrok Client",
- "description": "Create a web server that accessible from local and remote on VS Code.",
- "version": "1.0.2",
- "icon": "images/logo.png",
- "publisher": "ceyhunkeklik",
- "repository": {
-  "type": "git",
-  "url": "https://github.com/ceyhunkeklik/vscode-ngrok-client.git"
- },
- "engines": {
-  "vscode": "^1.30.0"
- },
- "categories": [
-  "Other"
- ],
- "activationEvents": [
-  "*",
-  "onCommand:ngrok-client.toggle",
-  "onCommand:ngrok-client.startServer",
-  "onCommand:ngrok-client.stopServer"
- ],
- "main": "./out/extension.js",
- "contributes": {
-  "commands": [
-   {
-    "command": "ngrok-client.startServer",
-    "title": "ngrok Client: Start Server"
-   },
-   {
-    "command": "ngrok-client.stopServer",
-    "title": "ngrok Client: Stop Server"
-   }
-  ]
- },
- "scripts": {
-  "vscode:prepublish": "npm run compile",
-  "compile": "tsc -p ./",
-  "watch": "tsc -watch -p ./",
-  "postinstall": "node ./node_modules/vscode/bin/install",
-  "test": "npm run compile && node ./node_modules/vscode/bin/test"
- },
- "devDependencies": {
-  "@types/http-server": "0.10.0",
-  "@types/mocha": "5.2.7",
-  "@types/node": "12.12.5",
-  "@types/request": "2.48.3",
-  "tslint": "5.20.0",
-  "typescript": "3.6.4",
-  "vscode": "1.1.36"
- },
- "dependencies": {
-  "http-server": "0.11.1",
-  "ngrok": "3.2.5",
-  "open": "7.0.0",
-  "portfinder": "1.0.25",
-  "request": "2.88.0"
- }
+  "name": "vscode-ngrok-client",
+  "displayName": "ngrok Client",
+  "description": "Create a web server that accessible from local and remote on VS Code.",
+  "version": "1.0.2",
+  "icon": "images/logo.png",
+  "publisher": "ceyhunkeklik",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ceyhunkeklik/vscode-ngrok-client.git"
+  },
+  "engines": {
+    "vscode": "^1.30.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "*",
+    "onCommand:ngrok-client.toggle",
+    "onCommand:ngrok-client.startServer",
+    "onCommand:ngrok-client.stopServer"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "ngrok-client.startServer",
+        "title": "ngrok Client: Start Server"
+      },
+      {
+        "command": "ngrok-client.stopServer",
+        "title": "ngrok Client: Stop Server"
+      }
+    ],
+    "configuration": [
+      {
+        "title": "ngrok Client",
+        "properties": {
+          "ngrok-client.portNumber": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "default": null,
+            "description": "The port number that will be used for starting port If you don't set any number, portfinder will found automatically."
+          }
+        }
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "npm run compile && node ./node_modules/vscode/bin/test"
+  },
+  "devDependencies": {
+    "@types/http-server": "0.10.0",
+    "@types/mocha": "5.2.7",
+    "@types/node": "12.12.5",
+    "@types/request": "2.48.3",
+    "tslint": "5.20.0",
+    "typescript": "3.6.4",
+    "vscode": "1.1.36"
+  },
+  "dependencies": {
+    "http-server": "0.11.1",
+    "ngrok": "3.2.5",
+    "open": "7.0.0",
+    "portfinder": "1.0.25",
+    "request": "2.88.0"
+  }
 }
