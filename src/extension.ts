@@ -1,9 +1,10 @@
 import * as vscode from "vscode";
 import * as request from "request";
 import * as ngrok from "ngrok";
-import * as httpServer from "http-server";
+import * as express from "express";
 import * as portFinder from "portfinder";
 import * as open from "open";
+import * as serveIndex from "serve-index";
 
 import constants from "./constants";
 
@@ -68,16 +69,16 @@ export function activate(context: vscode.ExtensionContext) {
 
           var startPort = (port: any) => {
             try {
-              createLog(`Creating local http server...`);
-              httpServerInstance = httpServer.createServer({
-                root: path,
-                showDir: true,
-                showDotfiles: true
-              });
+              createLog(`Creating local web server...`);
 
-              httpServerInstance.listen(Number(port));
+              const app = express();
+              app.use(
+                express.static(path), serveIndex(path)
+              );
+              app.listen(port, () =>
+                createLog(`Local web server started successfully; Local URL: http://localhost:${port}`)
+              );
 
-              createLog(`Local http-server started successfully; Local URL: http://localhost:${port}`);
               createLog(`Creating remote http server via ngrok...`);
 
               ngrok
