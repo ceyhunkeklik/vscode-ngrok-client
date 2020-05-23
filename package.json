@@ -2,7 +2,8 @@
   "name": "vscode-ngrok-client",
   "displayName": "ngrok Client",
   "description": "Create a web server that accessible from local and remote on VS Code.",
-  "version": "1.0.4",
+  "version": "1.0.5",
+  "build": "0",
   "icon": "images/logo.png",
   "publisher": "ceyhunkeklik",
   "repository": {
