@@ -57,21 +57,21 @@
     "test": "npm run compile && node ./node_modules/vscode/bin/test"
   },
   "devDependencies": {
-    "@types/express": "4.17.2",
-    "@types/mocha": "5.2.7",
-    "@types/node": "12.12.5",
-    "@types/request": "2.48.3",
+    "@types/express": "4.17.6",
+    "@types/mocha": "7.0.2",
+    "@types/node": "14.0.5",
+    "@types/request": "2.48.5",
     "@types/serve-index": "1.7.30",
-    "tslint": "5.20.0",
-    "typescript": "3.6.4",
-    "vscode": "1.1.36"
+    "tslint": "6.1.2",
+    "typescript": "3.9.3",
+    "vscode": "1.1.37"
   },
   "dependencies": {
     "express": "4.17.1",
-    "ngrok": "3.2.5",
-    "open": "7.0.0",
-    "portfinder": "1.0.25",
-    "request": "2.88.0",
+    "ngrok": "3.2.7",
+    "open": "7.0.4",
+    "portfinder": "1.0.26",
+    "request": "2.88.2",
     "serve-index": "1.9.1"
   }
 }
