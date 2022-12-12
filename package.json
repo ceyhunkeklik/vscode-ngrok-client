@@ -68,7 +68,7 @@
     "vscode": "1.1.37"
   },
   "dependencies": {
-    "express": "4.17.1",
+    "express": "4.17.3",
     "ngrok": "3.2.7",
     "open": "7.0.4",
     "portfinder": "1.0.26",
